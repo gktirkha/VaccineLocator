@@ -36,8 +36,8 @@ public class HospitalDetails extends AppCompatActivity {
         hName.setText(hospital.gethName());
         hID.setText("Hospital ID: "+hospital.getId());
         feeType.setText("Fee Type: "+hospital.getFeeType());
-        vaccineName.setText("Vaccine name: "+hospital.getVaccineName());
-        vaccinePrice.setText("Price: "+hospital.getFee());
+        vaccineName.setText("Vaccine Name: "+hospital.getVaccineName());
+        vaccinePrice.setText("Vaccination Fee: "+hospital.getFee());
         address.setText(hospital.gethAddress());
         dose1.setText("Dose1 Avalable: "+hospital.getDose1());
         dose2.setText("Dose2 Avalable: "+hospital.getDose2());
