@@ -45,6 +45,5 @@ public class HospitalDetails extends AppCompatActivity {
            ArrayAdapter<String> adapter = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,hospital.getTimings());
            timings.setAdapter(adapter);
        }else timings.setVisibility(View.GONE);
-
     }
 }
