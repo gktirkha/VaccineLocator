@@ -102,7 +102,16 @@ public class HospitalShow extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(HospitalShow.this, "error", Toast.LENGTH_SHORT).show();
+                coordinatorLayout = findViewById(R.id.snackbar);
+                Snackbar snackbar = Snackbar.make(coordinatorLayout, "Network Error, Please Connect To Internet And Try Again", Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent main = new Intent(HospitalShow.this, MainActivity.class);
+                        startActivity(main);
+                    }
+                });
+                snackbar.show();
+                progressBar.setVisibility(View.GONE);
             }
         });
         requestQueue.add(file);
