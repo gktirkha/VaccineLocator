@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class HospitalModel implements Serializable {
-    String id,hName,hAddress,feeType,vaccineName,dose1,dose2,fee;
+    String id, hName, hAddress, feeType, vaccineName, dose1, dose2, fee;
     ArrayList<String> timings;
 
     public HospitalModel(String id, String hName, String hAddress, String feeType, String vaccineName, String dose1, String dose2, String fee, ArrayList<String> timings) {

@@ -1,16 +1,15 @@
 package com.example.vaccine_locator;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,7 +26,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class HospitalShow extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -35,6 +33,7 @@ public class HospitalShow extends AppCompatActivity {
     ArrayList<HospitalModel> hospitalsArrayList;
     ProgressBar progressBar;
     CoordinatorLayout coordinatorLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,18 +43,19 @@ public class HospitalShow extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
         jsonParse();
     }
-    private void jsonParse(){
+
+    private void jsonParse() {
         String URL = getIntent().getStringExtra("URL");
         hospitalsArrayList = new ArrayList<>();
         recyclerView = findViewById(R.id.shoHospital_rcv);
-        HospitalModel blank = new HospitalModel("N/A","N/A","N/A","N/A","N/A","N/A","N/A","N/A",null);
+        HospitalModel blank = new HospitalModel("N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", null);
         hospitalsArrayList.add(blank);
         JsonObjectRequest file = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     JSONArray centres = response.getJSONArray("sessions");
-                    for (int i =0; i<centres.length();i++){
+                    for (int i = 0; i < centres.length(); i++) {
                         JSONObject data = centres.getJSONObject(i);
                         String id = data.getString("center_id");
                         String hName = data.getString("name");
@@ -67,28 +67,28 @@ public class HospitalShow extends AppCompatActivity {
                         String fee = data.getString("fee");
                         JSONArray slots = data.getJSONArray("slots");
                         ArrayList<String> timings = new ArrayList<>();
-                        for (int j =0;j<slots.length();j++){
+                        for (int j = 0; j < slots.length(); j++) {
                             timings.add(slots.getString(j));
                         }
-                        if ((Integer.parseInt(dose1)!=0)||Integer.parseInt(dose2)!=0){
-                            HospitalModel hospital = new HospitalModel(id,hName,hAddress,feeType,vaccineName,dose1,dose2,fee,timings);
+                        if ((Integer.parseInt(dose1) != 0) || Integer.parseInt(dose2) != 0) {
+                            HospitalModel hospital = new HospitalModel(id, hName, hAddress, feeType, vaccineName, dose1, dose2, fee, timings);
                             hospitalsArrayList.add(hospital);
                         }
                     }
-                    if ((hospitalsArrayList.size()>1)){
+                    if ((hospitalsArrayList.size() > 1)) {
                         hospitalsArrayList.remove(0);
                     }
-                    HospitalAdapter adapter = new HospitalAdapter(HospitalShow.this,hospitalsArrayList);
+                    HospitalAdapter adapter = new HospitalAdapter(HospitalShow.this, hospitalsArrayList);
                     recyclerView.setAdapter(adapter);
 
                     LinearLayoutManager layoutManager = new LinearLayoutManager(HospitalShow.this);
                     recyclerView.setLayoutManager(layoutManager);
-                    if (hospitalsArrayList.get(0)==blank){
+                    if (hospitalsArrayList.get(0) == blank) {
                         coordinatorLayout = findViewById(R.id.snackbar);
-                        Snackbar snackbar = Snackbar.make(coordinatorLayout,"No Hospitals Found",Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
+                        Snackbar snackbar = Snackbar.make(coordinatorLayout, "No Hospitals Found", Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent main = new Intent(HospitalShow.this,MainActivity.class);
+                                Intent main = new Intent(HospitalShow.this, MainActivity.class);
                                 startActivity(main);
                             }
                         });
