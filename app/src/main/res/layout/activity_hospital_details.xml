@@ -118,7 +118,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/hospitalDetail_dose2"
         android:layout_marginTop="20dp"
-        android:text="Timings"
+        android:text="Timings:"
         android:textSize="20sp"
         android:textStyle="bold" />
 
