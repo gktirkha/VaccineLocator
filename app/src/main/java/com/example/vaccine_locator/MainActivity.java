@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                     if (pin.length() == 6) {
                         String URL = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode=" + pin + "&date=" + date;
                         Intent intent = new Intent(MainActivity.this, HospitalShow.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("URL", URL);
                         startActivity(intent);
                     } else
