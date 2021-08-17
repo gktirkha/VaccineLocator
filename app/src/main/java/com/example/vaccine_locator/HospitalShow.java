@@ -39,12 +39,12 @@ public class HospitalShow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospital_show);
         progressBar = findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.VISIBLE);
         requestQueue = Volley.newRequestQueue(this);
         jsonParse();
     }
 
     private void jsonParse() {
+        progressBar.setVisibility(View.VISIBLE);
         String URL = getIntent().getStringExtra("URL");
         hospitalsArrayList = new ArrayList<>();
         recyclerView = findViewById(R.id.shoHospital_rcv);
@@ -88,8 +88,9 @@ public class HospitalShow extends AppCompatActivity {
                         Snackbar snackbar = Snackbar.make(coordinatorLayout, "No Hospitals Found", Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent main = new Intent(HospitalShow.this, MainActivity.class);
-                                startActivity(main);
+                                Intent intent = new Intent(HospitalShow.this, MainActivity.class);
+                                intent.putExtra("pin",getIntent().getStringExtra("pin"));
+                                startActivity(intent);
                             }
                         });
                         snackbar.show();
@@ -106,8 +107,7 @@ public class HospitalShow extends AppCompatActivity {
                 Snackbar snackbar = Snackbar.make(coordinatorLayout, "Network Error, Please Connect To Internet And Try Again", Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent main = new Intent(HospitalShow.this, MainActivity.class);
-                        startActivity(main);
+                        jsonParse();
                     }
                 });
                 snackbar.show();

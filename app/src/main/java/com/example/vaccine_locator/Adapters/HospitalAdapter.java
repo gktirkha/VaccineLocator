@@ -46,7 +46,7 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.viewHo
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, HospitalDetails.class);
-                intent.putExtra("obj",model);
+                intent.putExtra("obj", model);
                 context.startActivity(intent);
             }
         });

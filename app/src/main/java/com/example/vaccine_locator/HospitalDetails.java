@@ -1,22 +1,20 @@
 package com.example.vaccine_locator;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vaccine_locator.Models.HospitalModel;
 
-import java.util.ArrayList;
-
 public class HospitalDetails extends AppCompatActivity {
     HospitalModel hospital;
-    TextView hName,hID,feeType,vaccineName,vaccinePrice,address,dose1,dose2;
+    TextView hName, hID, feeType, vaccineName, vaccinePrice, address, dose1, dose2;
     ListView timings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,16 +32,16 @@ public class HospitalDetails extends AppCompatActivity {
         timings = findViewById(R.id.hospitalDetail_timings);
 
         hName.setText(hospital.gethName());
-        hID.setText("Hospital ID: "+hospital.getId());
-        feeType.setText("Fee Type: "+hospital.getFeeType());
-        vaccineName.setText("Vaccine Name: "+hospital.getVaccineName());
-        vaccinePrice.setText("Vaccination Fee: "+hospital.getFee());
+        hID.setText("Hospital ID: " + hospital.getId());
+        feeType.setText("Fee Type: " + hospital.getFeeType());
+        vaccineName.setText("Vaccine Name: " + hospital.getVaccineName());
+        vaccinePrice.setText("Vaccination Fee: " + hospital.getFee());
         address.setText(hospital.gethAddress());
-        dose1.setText("Dose1 Avalable: "+hospital.getDose1());
-        dose2.setText("Dose2 Avalable: "+hospital.getDose2());
-       if (hospital.getTimings()!=null){
-           ArrayAdapter<String> adapter = new ArrayAdapter<>(this,R.layout.support_simple_spinner_dropdown_item,hospital.getTimings());
-           timings.setAdapter(adapter);
-       }else timings.setVisibility(View.GONE);
+        dose1.setText("Dose1 Avalable: " + hospital.getDose1());
+        dose2.setText("Dose2 Avalable: " + hospital.getDose2());
+        if (hospital.getTimings() != null) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, hospital.getTimings());
+            timings.setAdapter(adapter);
+        } else timings.setVisibility(View.GONE);
     }
 }

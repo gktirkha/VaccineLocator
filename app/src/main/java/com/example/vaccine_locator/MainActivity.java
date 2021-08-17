@@ -32,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
         dateInput = findViewById(R.id.main_date_textview);
         dateInRel = findViewById(R.id.main_date_rel);
         searchButton = findViewById(R.id.main_search_button);
+        try {
+            String tPin = getIntent().getStringExtra("pin");
+            pinInput.setText(tPin);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         pinInput.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -75,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                         String URL = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode=" + pin + "&date=" + date;
                         Intent intent = new Intent(MainActivity.this, HospitalShow.class);
                         intent.putExtra("URL", URL);
+                        intent.putExtra("pin", pin);
                         startActivity(intent);
                     } else
                         Toast.makeText(MainActivity.this, "Invalid Pin", Toast.LENGTH_SHORT).show();
