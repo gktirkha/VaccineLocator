@@ -12,7 +12,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vaccine_locator.HospitalDetails;
-import com.example.vaccine_locator.HospitalShow;
 import com.example.vaccine_locator.Models.HospitalModel;
 import com.example.vaccine_locator.R;
 
@@ -58,7 +57,7 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.viewHo
         return list.size();
     }
 
-    class viewHolder extends RecyclerView.ViewHolder {
+    static class viewHolder extends RecyclerView.ViewHolder {
         TextView hName, address, vaccineName, feeType, dose1, dose2;
         CardView rcvCardView;
 
