@@ -48,8 +48,6 @@ public class HospitalShow extends AppCompatActivity {
         String URL = getIntent().getStringExtra("URL");
         hospitalsArrayList = new ArrayList<>();
         recyclerView = findViewById(R.id.shoHospital_rcv);
-        HospitalModel blank = new HospitalModel("N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", null);
-        hospitalsArrayList.add(blank);
         JsonObjectRequest file = new JsonObjectRequest(Request.Method.GET, URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -75,17 +73,15 @@ public class HospitalShow extends AppCompatActivity {
                             hospitalsArrayList.add(hospital);
                         }
                     }
-                    if ((hospitalsArrayList.size() > 1)) {
-                        hospitalsArrayList.remove(0);
-                    }
+
                     HospitalAdapter adapter = new HospitalAdapter(HospitalShow.this, hospitalsArrayList);
                     recyclerView.setAdapter(adapter);
 
                     LinearLayoutManager layoutManager = new LinearLayoutManager(HospitalShow.this);
                     recyclerView.setLayoutManager(layoutManager);
-                    if (hospitalsArrayList.get(0) == blank) {
+                    if (hospitalsArrayList.size()==0) {
                         coordinatorLayout = findViewById(R.id.snackbar);
-                        Snackbar snackbar = Snackbar.make(coordinatorLayout, "No Hospitals Found", Snackbar.LENGTH_INDEFINITE).setAction("Retry", new View.OnClickListener() {
+                        Snackbar snackbar = Snackbar.make(coordinatorLayout, "No Hospitals Found, Try Changing The Date", Snackbar.LENGTH_INDEFINITE).setAction("Change Date", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Intent intent = new Intent(HospitalShow.this, MainActivity.class);
